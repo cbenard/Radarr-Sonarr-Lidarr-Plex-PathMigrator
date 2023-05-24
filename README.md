@@ -1,6 +1,7 @@
 # Path Updater for Radarr and Sonarr Databases
 
-This Python script is designed to help you update paths in Radarr and Sonarr SQLite databases. This can be especially useful when moving your media files to a new location without breaking your database links. The script handles the databases for Radarr and Sonarr separately.
+This Python script is designed to help you update paths in Radarr and Sonarr SQLite databases. This can be especially useful when moving your 
+media files from Windows to Linux without breaking your database links. The script handles the databases for Radarr and Sonarr separately.
 
 ## How it Works
 
