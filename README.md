@@ -1,15 +1,44 @@
-# Purpose
-Change the pathings of the Sonarr database hosted on a windows machine to a linux machine.  
+# Path Updater for Radarr and Sonarr Databases
 
-# Usage
-1. **Create a backup of your nzbdrone.db file**
-2. Place your nzbdrone.db file in the same folder as the script
-3. If your new linux pathing isn't /media/ change the script accordingly. [Check here](https://github.com/IOKernel/MoveSonarrDB/issues/1)
-4. The script assumes that your folders on the windows machine is directly on the drive path, ex:  
-    >C:\TV Shows  
-    >C:\Movies  
+This Python script is designed to help you update paths in Radarr and Sonarr SQLite databases. This can be especially useful when moving your media files to a new location without breaking your database links. The script handles the databases for Radarr and Sonarr separately.
 
+## How it Works
 
-## WARNING
+The script connects to your SQLite databases and replaces old media paths with new ones. This operation is performed on several tables in the databases where paths are stored, ensuring all links in the database point to the correct location after moving your media files.
 
-This isn't supposed to be run blindly, I made the script quickly to move my database from windows to linux, and only posted this for anyone who is as lost as I was when I started this.
+## Setup
+
+Define your database names, and the corresponding old and new paths in the `database_dict` dictionary in the script. The structure of the dictionary is as follows:
+
+```
+database_dict = {
+    "database_name_1": {
+        "new_path_1": ["old_path_1", "old_path_2", "..."],
+        "new_path_2": ["old_path_3", "old_path_4", "..."],
+        ...
+    },
+    "database_name_2": {
+        "new_path_1": ["old_path_1", "old_path_2", "..."],
+        ...
+    },
+    ...
+}
+```
+
+**Note** - Paths should be entered in the format that your operating system uses. However, the script will normalize all paths to use forward slashes (/) for consistency.
+
+## Running the Script
+
+Run the script with Python:
+
+```
+python path_updater.py
+```
+
+As the script runs, it will print out old paths and their corresponding new paths. If a new path is not the same as the old path, it will update the old path to the new path in the database and print the new path.
+
+## Warnings
+
+1. **This script directly updates your SQLite databases. It is highly recommended that you back up your databases before running this script.**
+
+2. **Ensure that your new paths correctly point to the new locations of your media files before running the script.**
