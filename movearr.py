@@ -67,8 +67,13 @@ for database, old_to_new_paths in database_dict.items():
         update_table(sqlfile, 'RootFolders', 'Path', old_to_new_paths)
         update_table(sqlfile, 'Series', 'Path', old_to_new_paths)
         update_table(sqlfile, 'EpisodeFiles', 'RelativePath', old_to_new_paths)
+        update_table(sqlfile, 'EpisodeFiles', 'OriginalFilePath', old_to_new_paths)
         update_table(sqlfile, 'ExtraFiles', 'RelativePath', old_to_new_paths)
         update_table(sqlfile, 'SubtitleFiles', 'RelativePath', old_to_new_paths)
+        update_table(sqlfile, 'ImportLists', 'RootFolderPath', old_to_new_paths)
+        update_table(sqlfile, 'MetadataFiles', 'RelativePath', old_to_new_paths)
+        update_table(sqlfile, 'RemotePathMappings', 'RemotePath', old_to_new_paths)
+        update_table(sqlfile, 'RemotePathMappings', 'LocalPath', old_to_new_paths)
     elif database == "lidarr.db":
         update_table(sqlfile, 'RootFolders', 'Path', old_to_new_paths)
         update_table(sqlfile, 'RemotePathMappings', 'RemotePath', old_to_new_paths)
