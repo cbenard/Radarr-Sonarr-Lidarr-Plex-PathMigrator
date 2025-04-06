@@ -1,15 +1,6 @@
+from settings import database_dict
+import os.path
 import sqlite3
-
-# Define a dictionary to handle different databases, and their old paths and new paths
-database_dict = {
-    "radarr.db": {
-        "/data/movies": ["D:/Everything/Movies/Movies"]
-    },
-    "sonarr.db": {
-        "/data/tv/Anime": ["D:/Everything/Anime"],
-        "/data/tv/TV Series": ["D:/Everything/TV Series"]
-    }
-}
 
 # Normalize the paths: replace backslashes with forward slashes
 for db, path_dict in database_dict.items():
@@ -47,6 +38,7 @@ def update_table(sqlfile, table, column, old_to_new_paths):
     for row in data:
         # Get the old path from the first element of the row
         oldPath = row[0]
+        if oldPath is None: continue
         # Get the new path by calling the update_path function with the old path
         newPath = update_path(oldPath, old_to_new_paths)
         # If the new path is different from the old path
@@ -60,6 +52,10 @@ def update_table(sqlfile, table, column, old_to_new_paths):
 
 # Iterate over the dictionary of databases
 for database, old_to_new_paths in database_dict.items():
+    # Check for file existence
+    if not os.path.isfile(db):
+        print(f"\"{db}\" does not exist. Skipping.")
+        continue
     # Connect to the SQLite database file
     sqlfile = sqlite3.connect(database)
     # Call the update_table function with different table and column names based on the database
@@ -73,6 +69,17 @@ for database, old_to_new_paths in database_dict.items():
         update_table(sqlfile, 'EpisodeFiles', 'RelativePath', old_to_new_paths)
         update_table(sqlfile, 'ExtraFiles', 'RelativePath', old_to_new_paths)
         update_table(sqlfile, 'SubtitleFiles', 'RelativePath', old_to_new_paths)
+    elif database == "lidarr.db":
+        update_table(sqlfile, 'RootFolders', 'Path', old_to_new_paths)
+        update_table(sqlfile, 'RemotePathMappings', 'RemotePath', old_to_new_paths)
+        update_table(sqlfile, 'RemotePathMappings', 'LocalPath', old_to_new_paths)
+        update_table(sqlfile, 'ImportLists', 'RootFolderPath', old_to_new_paths)
+        update_table(sqlfile, 'Artists', 'Path', old_to_new_paths)
+        update_table(sqlfile, 'ExtraFiles', 'RelativePath', old_to_new_paths)
+        update_table(sqlfile, 'LyricFiles', 'RelativePath', old_to_new_paths)
+        update_table(sqlfile, 'MetadataFiles', 'RelativePath', old_to_new_paths)
+        update_table(sqlfile, 'TrackFiles', 'Path', old_to_new_paths)
+        update_table(sqlfile, 'TrackFiles', 'OriginalFilePath', old_to_new_paths)
     # Close the database connection after all updates are done
     sqlfile.close()
 
