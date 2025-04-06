@@ -6,5 +6,8 @@ database_dict = {
     "sonarr.db": {
         "/data/tv/Anime": ["D:/Everything/Anime"],
         "/data/tv/TV Series": ["D:/Everything/TV Series"]
+    },
+    "lidarr.db": {
+        "/music": ["D:/Everything/Music"]
     }
 }
