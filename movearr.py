@@ -96,6 +96,11 @@ for database, old_to_new_paths in database_dict.items():
         update_table(sqlfile, 'TrackFiles', 'Path', old_to_new_paths)
         update_table(sqlfile, 'TrackFiles', 'OriginalFilePath', old_to_new_paths)
         update_table(sqlfile, 'Config', 'Value', old_to_new_paths)
+    elif database == "com.plexapp.plugins.library.db":
+        update_table(sqlfile, 'media_parts', 'file', old_to_new_paths)
+        update_table(sqlfile, 'section_locations', 'root_path', old_to_new_paths)
+        update_table(sqlfile, 'media_streams', 'url', old_to_new_paths)
+        update_table(sqlfile, 'metadata_items', 'guid', old_to_new_paths)
     # Close the database connection after all updates are done
     sqlfile.close()
 

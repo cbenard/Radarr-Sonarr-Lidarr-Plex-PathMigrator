@@ -9,5 +9,11 @@ database_dict = {
     },
     "lidarr.db": {
         "/music": ["D:/Everything/Music"]
+    },
+    "com.plexapp.plugins.library.db": {
+        "/data/movies": ["D:/Everything/Movies/Movies"],
+        "/data/tv/Anime": ["D:/Everything/Anime"],
+        "/data/tv/TV Series": ["D:/Everything/TV Series"],
+        "/music": ["D:/Everything/Music"]
     }
 }
