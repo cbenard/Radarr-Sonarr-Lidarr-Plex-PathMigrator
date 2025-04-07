@@ -1,7 +1,8 @@
-# Path Updater for Radarr and Sonarr Databases
+# Path Updater for Radarr, Sonarr, Lidarr, and Plex Databases
 
-This Python script is designed to help you update paths in Radarr, Sonarr, and Lidarr SQLite databases. This can be especially useful when moving your 
-media files from Windows to Linux without breaking your database links. The script handles the databases for Radarr and Sonarr separately.
+This Python script is designed to help you update paths in Radarr, Sonarr, Lidarr, and Plex SQLite databases. This can be especially useful
+when moving your media files from Windows to Linux without breaking your database links. The script handles the databases for Radarr,
+Sonarr, Lidarr, and Plex separately.
 
 ## How it Works
 
@@ -35,7 +36,7 @@ database_dict = {
 Run the script from a directory containing `.db files` with Python:
 
 ```
-python3 path_updater.py
+python3 movarr.py
 ```
 
 As the script runs, it will print out old paths and their corresponding new paths. If a new path is not the same as the old path, it will update the old path to the new path in the database and print the new path.

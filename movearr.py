@@ -71,6 +71,7 @@ for database, old_to_new_paths in database_dict.items():
         update_table(sqlfile, 'MovieFiles', 'OriginalFilePath', old_to_new_paths)
         update_table(sqlfile, 'SubtitleFiles', 'RelativePath', old_to_new_paths)
         update_table(sqlfile, 'ImportLists', 'RootFolderPath', old_to_new_paths)
+        update_table(sqlfile, 'Config', 'Value', old_to_new_paths)
     elif database == "sonarr.db":
         update_table(sqlfile, 'RootFolders', 'Path', old_to_new_paths)
         update_table(sqlfile, 'Series', 'Path', old_to_new_paths)
@@ -82,6 +83,7 @@ for database, old_to_new_paths in database_dict.items():
         update_table(sqlfile, 'MetadataFiles', 'RelativePath', old_to_new_paths)
         update_table(sqlfile, 'RemotePathMappings', 'RemotePath', old_to_new_paths)
         update_table(sqlfile, 'RemotePathMappings', 'LocalPath', old_to_new_paths)
+        update_table(sqlfile, 'Config', 'Value', old_to_new_paths)
     elif database == "lidarr.db":
         update_table(sqlfile, 'RootFolders', 'Path', old_to_new_paths)
         update_table(sqlfile, 'RemotePathMappings', 'RemotePath', old_to_new_paths)
@@ -93,6 +95,12 @@ for database, old_to_new_paths in database_dict.items():
         update_table(sqlfile, 'MetadataFiles', 'RelativePath', old_to_new_paths)
         update_table(sqlfile, 'TrackFiles', 'Path', old_to_new_paths)
         update_table(sqlfile, 'TrackFiles', 'OriginalFilePath', old_to_new_paths)
+        update_table(sqlfile, 'Config', 'Value', old_to_new_paths)
+    elif database == "com.plexapp.plugins.library.db":
+        update_table(sqlfile, 'media_parts', 'file', old_to_new_paths)
+        update_table(sqlfile, 'section_locations', 'root_path', old_to_new_paths)
+        update_table(sqlfile, 'media_streams', 'url', old_to_new_paths)
+        update_table(sqlfile, 'metadata_items', 'guid', old_to_new_paths)
     # Close the database connection after all updates are done
     sqlfile.close()
 
